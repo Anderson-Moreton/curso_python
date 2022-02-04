@@ -67,3 +67,29 @@ footer p {
         padding: 0 20px;
     }
 }
+
+#tituloAbout {
+    text-align: center;
+    font-size: 60px; 
+}
+
+.p1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.p2 {
+    text-align: center;
+    
+}
+
+#bannerAbout {
+    background-image: url("../img/jane2.jpg");
+    width: 400px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 10px auto 50px;
+}
