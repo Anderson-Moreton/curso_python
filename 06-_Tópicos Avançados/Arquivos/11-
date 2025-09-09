@@ -1,0 +1,25 @@
+import glob, os, zipfile
+
+# Diretório de trabalho atual
+print(os.getcwd())
+
+# Listar todos os arquivos txt
+for file in glob.glob("dados/*.txt"):
+    print(file)
+
+# Listar todos os arquivos csv
+for file in glob.glob("dados/*.csv"):
+    print(file) 
+
+# compactar arquivos txt
+with zipfile.ZipFile("dados/textos.zip", "w") as zip:
+    for file in glob.glob("dados/*.txt"):
+        zip.write(file)
+
+# Compactar todos os arquivos 
+with zipfile.ZipFile("dados/todos.zip", "w") as zip:
+    for file in glob.glob("dados/*.*"):
+        zip.write(file)
+
+                                                                                                                                                                                                        
+
