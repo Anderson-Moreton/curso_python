@@ -6,7 +6,7 @@ mydb = client.dbposts
 mycol = mydb.posts
 
 old_value = { "level": "Intermediário"}
-new_value = { "$set": {"level": "Iniciante"}}
+new_value = { "$set": {"level": "Avançado"}}
 
 mycol.update_one(old_value, new_value)
 

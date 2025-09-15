@@ -5,12 +5,12 @@ mydb = client.dbposts
 mycol = mydb.posts
 
 post1 = {
-    "title": "Pandas",
-    "category": "Data Analysis",
+    "title": "Organization",
+    "category": "Production",
     "level": "Intermediário",
     "author": {
-        "name": "Fulano",
-        "email": "fulano@email.com"
+        "name": "Priscila",
+        "email": "priscila.moreton16@email.com"
     }
 }
 

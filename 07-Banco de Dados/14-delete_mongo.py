@@ -5,7 +5,7 @@ client = MongoClient()
 mydb = client.dbposts
 mycol = mydb.posts
 
-myquery = {"category": "Backend"}
+myquery = {"category": "Production"}
 
 x = mycol.delete_one(myquery)
 

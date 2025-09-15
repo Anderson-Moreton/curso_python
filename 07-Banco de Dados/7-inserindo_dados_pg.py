@@ -3,8 +3,8 @@ from conexao_post import conn
 cursor_obj = conn.cursor()
 
 games = [
-    ('The Last of us II', 2020, 9.5),
-    ('Spider Man 2', 2023, 10.0)
+    ('Fifa', 2025, 9.2),
+    ('GTA', 2025, 10.0)
 ]
 
 for game in games:

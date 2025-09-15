@@ -7,7 +7,7 @@ sql = """
     WHERE id = %s
 """
 
-cursor_obj.execute(sql, (5, ))
+cursor_obj.execute(sql, (4, ))
 
 conn.commit()
 
