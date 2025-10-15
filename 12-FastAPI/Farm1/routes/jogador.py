@@ -32,7 +32,7 @@ async def cadastra_jogadores(jogador: Jogador):
     conexao.local.jogador.insert_one(dict(jogador))
     return listaJogadoresEntidade(conexao.local.jogador.find())
 
-#Atualiza jogadro
+#Atualiza jogador
 @jogador_router.put('/jogadores/{jogador_id}')
 async def atualiza_jogador(jogador_id, jogador: Jogador):
     conexao.local.jogador.find_one_and_update(
@@ -43,6 +43,15 @@ async def atualiza_jogador(jogador_id, jogador: Jogador):
             "$set": dict(jogador)
         }
     )
+    return jogadoresEntidade(
+        conexao.local.jogador.find_one(
+            {"_id": ObjectId(jogador_id)}
+        )
+    )
+
+#Deleta jogador
+@jogador_router.delete('/jogador/{jogador_id}')
+async def deleta_jogador(jogador_id):
     return jogadoresEntidade(
         conexao.local.jogador.find_one(
             {"_id": ObjectId(jogador_id)}
