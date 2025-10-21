@@ -50,7 +50,7 @@ async def atualiza_jogador(jogador_id, jogador: Jogador):
     )
 
 #Deleta jogador
-@jogador_router.delete('/jogador/{jogador_id}')
+@jogador_router.delete('/jogadores/{jogador_id}')
 async def deleta_jogador(jogador_id):
     return jogadoresEntidade(
         conexao.local.jogador.find_one(

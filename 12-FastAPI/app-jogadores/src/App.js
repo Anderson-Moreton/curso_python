@@ -1,6 +1,38 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+
+  const [jogadorList, setJogadorList] = useState([]);
+  const [jogadorNome, setJogadorNome] = useState('');
+  const [jogadorIdade, setJogadorIdade] = useState('');
+  const [jogadorTime, setJogadorTime] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/jogadores')
+      .then((response) => {
+        setJogadorList(response.data);
+      }).catch((error) => {
+        console.error('Erro ao buscar jogadores:', error);
+      });
+  }, []);
+
+  const adicionaJogador = () =>{
+    const jogador = {
+      'jogador_nome' : jogadorNome,
+      'jogador_idade' : jogadorIdade,
+      'jogador_time' : jogadorTime
+    }
+    axios.post('http://localhost:8000/jogadores', jogador)
+      .then((response) => {
+        setJogadorList([...jogadorList, response.data]);
+      }).catch((error) => {
+        console.error('Erro ao adicionar jogador:', error);
+      });
+  }
+
   return (
     <div className='container'>
       <div 
@@ -12,10 +44,22 @@ function App() {
         <div className = 'card-body text-center'>
           <h5 className = 'card text-center text-white bg-dark mb-2 pb-1'>Cadastro de jogadores</h5>
           <span className = 'card-text'>
-            <input className = 'mb-2 form-control' placeholder='Informe o Nome'/>
-            <input className = 'mb-2 form-control' placeholder='Informe a Idade'/>
-            <input className= 'mb-2 form-control' placeholder='Informe o Time'/>
-            <button className ='btn btn-outline-success mb-4'>Cadastrar</button>
+            <input
+              onChange={ Event => setJogadorNome(Event.target.value) }
+              className = 'mb-2 form-control' placeholder='Informe o Nome'
+            />
+            <input
+              onChange={ Event => setJogadorIdade(Event.target.value) } 
+              className = 'mb-2 form-control' placeholder='Informe a Idade'
+            />
+            <input
+              onChange={ Event => setJogadorTime(Event.target.value) }
+              className= 'mb-2 form-control' placeholder='Informe o Time'
+            />
+            <button 
+              onClick={adicionaJogador}
+              className ='btn btn-outline-success mb-4'>Cadastrar
+            </button>
           </span>
           <h5 className = 'card text-center text-white bg-dark mb-3 pb-1'>Lista de Jogadores</h5>
           <div>
