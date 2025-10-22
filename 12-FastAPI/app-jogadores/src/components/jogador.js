@@ -6,7 +6,7 @@ function Jogador(props) {
         axios.delete(`http://localhost:8000/jogadores/${jogadorId}`)
             .then(
                 response => {
-                    alert('Jogador excluído com sucesso!');
+                    alert("Jogador excluído com sucesso!" + response.data);
                 }
             )
     }

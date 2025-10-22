@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import JogadorList from './components/jogadorList';
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
           </span>
           <h5 className = 'card text-center text-white bg-dark mb-3 pb-1'>Lista de Jogadores</h5>
           <div>
-
+            <JogadorList jogadorList={jogadorList} />
           </div>
         </div>
         <h6 className = 'card text-center text-light bg-success py-1'>Anderson Moreton - 2025</h6>
