@@ -10,6 +10,13 @@ function Jogador(props) {
                 }
             )
     }
+    const editaJogador = (jogador) => {
+        props.setJogadorId(jogador.id);
+        props.setJogadorNome(jogador.nome);
+        props.setJogadorIdade(jogador.idade);
+        props.setJogadorTime(jogador.time);
+        props.setBotaoTexto('Atualizar');
+    }
 
     return (
         <div>
@@ -17,6 +24,12 @@ function Jogador(props) {
                 <span className = 'fw-bold'>
                     {props.jogador.jogador_nome} - {props.jogador.jogador_idade} anos - Time: {props.jogador.jogador_time}
                 </span>
+                <button
+                    onClick={() => editaJogador(props.jogador)}
+                    className = 'btn btn-danger'
+                >
+                    <span className = 'badge rounded-pill bg-info'>Editar</span>
+                </button>
                 <button 
                     onClick={() => excluiJogador(props.jogador.jogador_id)}
                     className = 'btn btn-danger'

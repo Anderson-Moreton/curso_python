@@ -10,28 +10,51 @@ function App() {
   const [jogadorNome, setJogadorNome] = useState('');
   const [jogadorIdade, setJogadorIdade] = useState('');
   const [jogadorTime, setJogadorTime] = useState('');
+  const [jogadorId, setJogadorId] = useState('');
+  const [botaoTexto, setBotaoTexto] = useState('Cadastrar');
 
   useEffect(() => {
-    axios.get('http://localhost:8000/jogadores')
-      .then((response) => {
-        setJogadorList(response.data);
-      }).catch((error) => {
-        console.error('Erro ao buscar jogadores:', error);
-      });
-  }, []);
+    axios.get('http://127.0.0.1:8000/jogadores')
+      .then(response => {
+        console.log(response.data)
+        setJogadorList(response.data)
+      }).catch(
+        (error) => {console.log(error)}
+      )
+  });
 
-  const adicionaJogador = () =>{
-    const jogador = {
-      'jogador_nome' : jogadorNome,
-      'jogador_idade' : jogadorIdade,
-      'jogador_time' : jogadorTime
-    }
-    axios.post('http://localhost:8000/jogadores', jogador)
+  const adicionaJogador = (jogador) => {
+    axios.post('http://127.0.0.1:8000/jogadores', jogador)
       .then((response) => {
         setJogadorList([...jogadorList, response.data]);
       }).catch((error) => {
         console.error('Erro ao adicionar jogador:', error);
       });
+  };
+
+  const atualizaJogador = (jogador) => {
+    axios.put(`http://127.0.0.1:8000/jogadores/${jogadorId}`, jogador)
+      .then(response =>{
+        alert("Jogador atualizado com sucesso!" + response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao atualizar jogador:', error);
+      })
+  }
+
+  const adicionaAtualizaJogador = () =>{
+    const jogador = {
+      'jogador_nome' : jogadorNome,
+      'jogador_idade' : jogadorIdade,
+      'jogador_time' : jogadorTime
+    }
+
+    if(jogadorId !== ''){
+      atualizaJogador(jogador);
+    } else{
+      adicionaJogador(jogador);
+    }
+
   }
 
   return (
@@ -47,24 +70,35 @@ function App() {
           <span className = 'card-text'>
             <input
               onChange={ Event => setJogadorNome(Event.target.value) }
+              value={jogadorNome}
               className = 'mb-2 form-control' placeholder='Informe o Nome'
             />
             <input
               onChange={ Event => setJogadorIdade(Event.target.value) } 
+              value={jogadorIdade}
               className = 'mb-2 form-control' placeholder='Informe a Idade'
             />
             <input
               onChange={ Event => setJogadorTime(Event.target.value) }
+              value={jogadorTime}
               className= 'mb-2 form-control' placeholder='Informe o Time'
             />
             <button 
-              onClick={adicionaJogador}
-              className ='btn btn-outline-success mb-4'>Cadastrar
+              onClick={adicionaAtualizaJogador}
+              className ='btn btn-outline-success mb-4'>
+              {botaoTexto}
             </button>
           </span>
           <h5 className = 'card text-center text-white bg-dark mb-3 pb-1'>Lista de Jogadores</h5>
           <div>
-            <JogadorList jogadorList={jogadorList} />
+            <JogadorList 
+              jogadorList={jogadorList}
+              setJogadorId={setJogadorId}
+              setJogadorNome={setJogadorNome}
+              setJogadorIdade={setJogadorIdade}
+              setJogadorTime={setJogadorTime}
+              setBotaoTexto={setBotaoTexto}
+            />
           </div>
         </div>
         <h6 className = 'card text-center text-light bg-success py-1'>Anderson Moreton - 2025</h6>
