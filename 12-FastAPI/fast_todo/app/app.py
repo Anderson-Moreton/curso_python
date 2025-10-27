@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from core.config import settings
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
+from models.user_model import User
 
 
 app = FastAPI(
@@ -14,4 +15,9 @@ async def app_init():
     cliente_db = AsyncIOMotorClient(
         settings.MONGO_CONNECTION_STRING).todoapp
     
-    await init_beanie(database=cliente_db, document_models=[])  # Add your document models here
+    await init_beanie(
+        database=cliente_db,
+        document_models=[
+            User
+    ]
+)  # Add your document models here
